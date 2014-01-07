@@ -234,4 +234,33 @@ $(document).ready(function(){
         ctx.fillText(text, 150, 200);
     }
 
+    // chuong 2: drawing on canvas
+    var c2 = document.getElementById('chuong2');
+    var context2 = c2.getContext("2d");
+    drawScreen2();
+    function drawScreen2() {
+        // the basic rectangle shape
+        context2.fillStyle = "#000000";
+        context2.strokeStyle = "#ff00ff";
+        context2.lineWidth = 2;
+        context2.fillRect(10, 10, 40, 40);
+        context2.strokeRect(0, 0, 60, 60);
+        context2.clearRect(20, 20, 20, 20);
+
+        context2.fillRect(120, 10, 40, 40);
+        context2.lineWidth = 10;
+        context2.strokeRect(100, 0, 80, 80);
+
+        // a simple line path
+        context2.strokeStyle = "black";
+        context2.strokeRect = "black";
+        context2.lineWidth = 10;
+        context2.lineCap = 'square';
+        context2.beginPath();
+        context2.moveTo(20, 0);
+        context2.lineTo(100, 0);
+        context2.stroke();
+        context2.closePath();
+    }
+
 })
