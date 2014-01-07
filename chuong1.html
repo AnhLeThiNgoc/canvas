@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang = "en">
+	<head>
+		<meta charset = "utf-8">
+		<title>Canvas and HTML5 chaper 1</title>
+		<!-- cach tot nhat de test trinh duyet co ho tro canvas k -->
+		<script type="text/javascript" src = "modernizr.js"></script> 
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script type="text/javascript" src ="canvas.js"></script>
+	</head>
+	<body>
+		<div style = "position: absolute; top: 50px; left: 50px;">
+			<canvas id = "canvasone" width = "500" height = "300"> Your browser dose not support HTML5 canvas - doan text nay chi hien khi trinh duyet cua ban khong ho tro canvas</canvas>
+			<!-- tao button exporting canvas to an image -->
+			<form>
+				<input type ="button" id ="createImageData" value = "Export canvas image">
+			</form>
+		</div>
+
+		<div style = "position: absolute; top: 450px; left: 50px; ">
+			<canvas id = "canvastwo" width = "640" height = "480"></canvas>
+			<div> A yellow background with an image ang text on top:
+				<ol>
+					<li>The text says "Hello world"</li>
+					<li>the image is of the planet earth</li>
+				</ol>
+			</div>
+		</div>
+		<!-- tao hieu ung mo dan chu tren man hinh -->
+	</body>
+</html>
