@@ -236,6 +236,9 @@ $(document).ready(function(){
 
     // chuong 2: drawing on canvas
     var c2 = document.getElementById('chuong2');
+    // set lai do rong cho canvas o day
+    $('#chuong2').attr("width", "1000px");
+    $('#chuong2').attr("height", "1000px");
     var context2 = c2.getContext("2d");
     drawScreen2();
     function drawScreen2() {
@@ -248,19 +251,141 @@ $(document).ready(function(){
         context2.clearRect(20, 20, 20, 20);
 
         context2.fillRect(120, 10, 40, 40);
-        context2.lineWidth = 10;
+        context2.lineWidth = 10; //defalu = 1.0
         context2.strokeRect(100, 0, 80, 80);
 
         // a simple line path
         context2.strokeStyle = "black";
         context2.strokeRect = "black";
         context2.lineWidth = 10;
-        context2.lineCap = 'square';
+        //context2.lineCap = 'square';
+        context2.lineCap = 'butt'; // 'round'
         context2.beginPath();
         context2.moveTo(20, 0);
         context2.lineTo(100, 0);
         context2.stroke();
         context2.closePath();
+
+        // ve goc cua 2 duong thang giao nhau
+        context2.beginPath();
+        context2.lineWidth = 10;
+        context2.lineJoin = "round"; //defaul = miter, round|miter| bevel
+        context2.moveTo(200, 20);
+        context2.lineTo(300, 50);
+        context2.lineTo(200, 100);
+        context2.lineTo(200, 20);
+        context2.stroke();
+        context2.closePath();
+
+        // line cap and join
+        // sample1: round end, bevel join, at top left of canvas
+        context2.strokeStyle = "blue";
+        context2.lineWidth = 10;
+        context2.lineJoin = 'bevel';
+        context2.lineCap = 'round';
+        context2.beginPath();
+        context2.moveTo(400,0);
+        context2.lineTo(425, 0);
+        context2.lineTo(425, 25);
+        context2.stroke();
+        context2.closePath();
+
+        // sample 2: round end, bevel join, not at top or left of canvas
+        context2.beginPath();
+        context2.moveTo(440, 0);
+        context2.lineTo(465, 0);
+        context2.lineTo(465, 25);
+        context2.stroke();
+        context2.closePath();
+
+        // advanced path methods - ve cac duong thang nang cao
+        // arcs : cung,  curves: cong
+
+        context2.beginPath();
+        context2.strokeStyle = "red";
+        context2.lineWidth = 5;
+        // toa do x,y, ban kinh, goc bat dau, goc ket thuc
+        // context2.arc(520, 50,20,0*Math.PI, 2*Math.PI,true); //false: theo chieu kim dong ho, true nguoc lai
+        context2.arc(580, 50, 20, (Math.PI/180)*0, (Math.PI/180)*90, false);
+        // context2.arc(580, 50, 20, (Math.PI/180)*0, (Math.PI/180)*90, true);
+        context2.stroke();
+        context2.closePath();
+        // context.arcTo()
+        // tim hieu them tren http://www.dbp-consulting.com/tutorials/canvas/CanvasArcTo.html
+        context2.beginPath();
+        context2.strokeStyle = "green";
+        context2.lineWidth = 10;
+        context2.moveTo(0, 150);
+        context2.lineTo(100, 350);
+        context2.arcTo(350, 500, 100, 100,20);
+        context2.stroke();
+        context2.closePath();
+
+        // bezier curves 
+        // tim hieu them http://www.html5canvastutorials.com/tutorials/html5-canvas-bezier-curves/
+        context2.beginPath();
+        context2.strokeStyle = "green";
+        context2.moveTo(150,0);
+        context2.bezierCurveTo(0,125,300,175,150,300);
+        context2.stroke();
+        context2.closePath();
+
+        // quadraticCurveTo
+        context2.beginPath();
+        context2.strokeStyle = "green";
+        context2.moveTo(200, 200);
+        context2.quadraticCurveTo(300,400,400,200);
+        context2.stroke();
+        context2.closePath();
+
+        
+        //the canvas clipping region
+        context2.fillStyle = "black";
+        context2.fillRect(400, 400, 200, 200);
+        context2.save();
+        context2.beginPath();
+        context2.fillStyle = "green";
+        context2.rect(390, 390, 50, 50);
+        context2.stroke();
+        context2.clip(); // http://www.w3schools.com/tags/canvas_clip.asp
+
+        //red circle
+        context2.beginPath();
+        context2.strokeStyle = "red";
+        context2.lineWidth = 5;
+        context2.arc(500, 500, 100, (Math.PI/180)*0, (Math.PI/180)*360, false);
+        //full circle
+        context2.stroke();
+        context2.closePath();
+
+        context2.restore();
+
+        //reclip to the entire canvas
+        context2.beginPath();
+        context2.strokeStyle = "green";
+        context2.rect(390, 390, 500,500);
+        context2.stroke();
+        context2.clip();
+
+        //draw a blue line that is not clipped
+        context2.beginPath();
+        context2.strokeStyle = "blue";
+        context2.lineWidth = 5;
+        context2.arc(500, 500, 50, (Math.PI)*0, (Math.PI/180)*360, false);
+        context2.stroke();
+        context2.closePath();
+
+        // compositing on the canvas
+        // su dung 
+        // globalAlpha: defaul = 1 do trong suot cua doi tuong
+        // globalCompositeOperation : http://www.w3schools.com/tags/canvas_globalcompositeoperation.asp
+        context2.fillStyle = "blue";
+        context2.fillRect(0, 0, 500, 500);
+        // context2.stroke();
+        // context2.globalCompositeOperation = 'source-over';
+        // context2.beginPath();
+        // context2.arc(540, 140, (Math.PI)*0, (Math.PI/180)*360, false);
+        // context2.stroke();
     }
 
 })
